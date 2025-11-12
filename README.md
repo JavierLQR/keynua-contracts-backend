@@ -1,98 +1,199 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# ⚙️ Keynua Contract Creator — Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API desarrollada con **NestJS + TypeScript + Axios + Swagger**, que se conecta al servicio de **Keynua** para crear contratos digitales, enviando los documentos, firmantes y configuraciones desde el frontend.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🚀 Tecnologías principales
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 🧠 **NestJS 11**
+- ⚡ **TypeScript**
+- 📦 **Axios (HTTP Client)**
+- 🧩 **Class Validator + Class Transformer**
+- 🔒 **Helmet + CORS**
+- 📘 **Swagger (Documentación API)**
+- 🧰 **PNPM (Package Manager)**
 
-## Project setup
+---
 
-```bash
-$ pnpm install
+## 📁 Estructura del proyecto
+
+```
+src/
+├── app.module.ts
+├── main.ts
+├── common/
+│   ├── utils/
+│   │   ├── axios-error.ts
+│   │   └── clear-base64.ts
+├── config/
+│   ├── app/
+│   │   └── config.app.ts
+│   ├── swagger/
+│   │   └── config.swagger.app.ts
+├── modules/
+│   └── contracts/
+│       ├── contracts.controller.ts
+│       ├── contracts.service.ts
+│       ├── dto/
+│       │   └── create-contract.dto.ts
+│       ├── entities/
+│       │   └── contract.entity.ts
+│       └── tests/
+│           └── contracts.service.spec.ts
+└── main.ts
 ```
 
-## Compile and run the project
+---
+
+## ⚙️ Instalación
+
+### 1️⃣ Clonar el repositorio
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+git clone https://github.com/JavierLQR/keynua-contracts-backend
+cd keynua-contracts-backend
 ```
 
-## Run tests
+### 2️⃣ Instalar dependencias
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm install
 ```
 
-## Deployment
+### 3️⃣ Variables de entorno
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Crea un archivo `.env` en la raíz del proyecto con lo siguiente:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+# Puerto local
+PORT=4000
+NODE_ENV=development
+
+# Keynua API
+BASE_URL_KEYNUA=https://api.stg.keynua.com/contracts/v1
+API_KEY_KEYNUA=msXm2X0QJV5ppfaCMgHZo4FBhS2rR4YT368bA19s
+API_TOKEN_KEYNUA=YjA3MmU0MTctYWM0OS00MzU1LTlhMzMtNzkzMTMxMjE4YmE1OjllMjk4Mzc5YmQwODRjYjNhNWY4YTlmMTA0NTA4MTkwOmJkZWU1NzNjZDE0Nzc4NjFjZTNhNDEzNTE0ZTA0M2NhMDI3NjhhNmU2NTAwMzlhMGY5ZjY5NThhZDY0ODQwNjQ
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+> ⚠️ **Aviso importante:**  
+> Estas credenciales (`API_KEY_KEYNUA` y `API_TOKEN_KEYNUA`) son **provisionales** y se eliminarán en un tiempo.  
+> Puedes utilizarlas temporalmente para pruebas locales y de integración, pero **no deben subirse a GitHub ni usarse en producción**.
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🧩 Scripts disponibles
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+| Comando | Descripción |
+|----------|--------------|
+| `pnpm start:dev` | Inicia el servidor en modo desarrollo |
+| `pnpm build` | Compila el proyecto con TypeScript |
+| `pnpm start:prod` | Inicia la aplicación en modo producción |
+| `pnpm test` | Ejecuta los tests unitarios (Jest) |
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🧠 Flujo general
 
-## Stay in touch
+1. **El frontend envía los datos** (documentos, firmantes, flags, etc.) al endpoint:
+   ```
+   POST /api-v1/contracts/create
+   ```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+2. **El backend construye el payload** compatible con el API de Keynua:
+   - Limpia los PDFs (remueve prefijo base64 con `clearBase64`)
+   - Ajusta teléfonos (`replace(/[^0-9]/g, '')`)
+   - Añade `flags.chosenNotificationOptions`
 
-## License
+3. **La API se comunica con Keynua** usando `Axios` y devuelve la respuesta completa:
+   ```json
+   {
+     "message": "Contract created successfully",
+     "data": { "id": "..." },
+     "statusCode": 201
+   }
+   ```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+4. El frontend redirige al detalle del contrato usando el `id`.
+
+---
+
+## 📘 Documentación Swagger
+
+Una vez el servidor esté corriendo, abre:
+
+👉 [http://localhost:4000/api/docs](http://localhost:4000/api/docs)
+
+Allí podrás probar los endpoints:
+- **POST /contracts/create** → Crear un nuevo contrato  
+- **GET /contracts/:id** → (opcional, si lo implementas después)
+
+---
+
+## 🧪 Ejemplo de request
+
+```json
+{
+  "title": "Contrato de Servicios",
+  "description": "Acuerdo de prestación de servicios de desarrollo web.",
+  "reference": "REF-2025-001",
+  "expirationInHours": 24,
+  "chosenNotificationOptions": ["email"],
+  "documents": [
+    {
+      "name": "contrato.pdf",
+      "base64": "data:application/pdf;base64,JVBERi0xLjQKJ..."
+    }
+  ],
+  "users": [
+    {
+      "name": "Javier Rojas",
+      "email": "javier.fullstack.qr@gmail.com",
+      "phone": "51931022090",
+      "groups": ["signers"]
+    }
+  ]
+}
+```
+
+---
+
+## 🔍 Test unitario de servicio
+
+El archivo `contracts.service.spec.ts` contiene pruebas para:
+
+- Verificar que `ContractsService` esté definido.
+- Mockear `HttpService` y simular respuestas exitosas y fallidas.
+- Probar `buildPayload()` y `create()` con datos simulados.
+
+Ejecuta los tests con:
+
+```bash
+pnpm test
+```
+
+---
+
+## 🔐 Seguridad y middlewares
+
+- **Helmet:** protege cabeceras HTTP.  
+- **CORS:** configurado para `http://localhost:3000`.  
+- **ValidationPipe:** limpia y transforma la data entrante.  
+- **Swagger:** documenta todos los endpoints.
+
+---
+
+
+## 🧑‍💻 Autor
+
+**Desarrollado por:** Javier Rojas
+📧 [javier.fullstack.qr@gmail.com](mailto:javier.fullstack.qr@gmail.com)  
+🌐 [LinkedIn](https://www.linkedin.com/in/javier-rojas-287989209/) · [GitHub](https://github.com/JavierLQR?tab=repositories)
+
+---
+
+## 🛠️ Licencia
+
+Este proyecto es de uso educativo y demostrativo — no oficial de Keynua.  
+Puedes modificarlo o extenderlo libremente para pruebas técnicas o portafolio.
