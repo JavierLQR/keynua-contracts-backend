@@ -44,6 +44,7 @@ export class ContractsService {
   public async findOne(id: string) {
     try {
       this.logger.verbose('Finding contract in Keynua')
+
       const { data } = await this.httpService.axiosRef.get<Contract>(`${this.base_url_keynua}/${id}`, this.config)
 
       this.logger.debug('Contract found successfully')
