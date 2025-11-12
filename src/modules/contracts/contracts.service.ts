@@ -43,8 +43,10 @@ export class ContractsService {
    */
   public async findOne(id: string) {
     try {
+      this.logger.verbose('Finding contract in Keynua')
       const { data } = await this.httpService.axiosRef.get<Contract>(`${this.base_url_keynua}/${id}`, this.config)
 
+      this.logger.debug('Contract found successfully')
       return {
         data,
         message: 'Contract found successfully',
@@ -64,9 +66,12 @@ export class ContractsService {
    */
   public async create(createContractDto: CreateContractDto) {
     try {
+      this.logger.verbose('Creating contract in Keynua')
+
       const payload = this.buildPayload(createContractDto)
       const { data } = await this.httpService.axiosRef.put<Contract>(`${this.base_url_keynua}`, payload, this.config)
 
+      this.logger.debug('Contract created successfully')
       return {
         data,
         message: 'Contract created successfully',
