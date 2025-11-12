@@ -2,9 +2,9 @@ name: Node.js CI (PNPM)
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
@@ -22,13 +22,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: 📦 Setup PNPM v10.19.0
         uses: pnpm/action-setup@v4
         with:
           version: 10.19.0
-          run_install: false
+
+      - name: 🧩 Verify pnpm version
+        run: pnpm -v
 
       - name: 📥 Install dependencies
         run: pnpm install --frozen-lockfile
