@@ -20,7 +20,7 @@ describe('ContractsService', () => {
 
   const mockConfigService = {
     getOrThrow: jest.fn((key: string) => {
-      const config = {
+      const config: Record<string, string> = {
         API_KEY_KEYNUA: 'mock-api-key',
         API_TOKEN_KEYNUA: 'mock-api-token',
         BASE_URL_KEYNUA: 'https://mock.keynua.com/api/contracts',
@@ -62,7 +62,7 @@ describe('ContractsService', () => {
       const dto: CreateContractDto = {
         title: 'Test Contract',
         reference: 'ABC123',
-        chosenNotificationOptions: ['email+whatsapp'],
+        chosenNotificationOptions: ['email', 'whatsapp'],
         documents: [{ name: 'file.pdf', base64: 'data:application/pdf;base64,ABCDEF123' }],
         users: [
           {
@@ -72,12 +72,22 @@ describe('ContractsService', () => {
             groups: ['signers'],
           },
         ],
+        templateId: 'template-001',
       }
 
-      const payload = service.buildPayload(dto)
+      const payload = (
+        service as unknown as {
+          buildPayload: (dto: CreateContractDto) => {
+            flags: { chosenNotificationOptions: string[] }
+            documents: Array<{ name: string; base64: string }>
+            users: Array<{ name: string; email: string; phone: string; groups: string[] }>
+            chosenNotificationOptions?: string[]
+          }
+        }
+      ).buildPayload(dto)
 
       expect(payload.flags).toEqual({
-        chosenNotificationOptions: ['email+whatsapp'],
+        chosenNotificationOptions: ['email', 'whatsapp'],
       })
       expect(payload.documents[0].base64).toBe('ABCDEF123')
       expect(payload.users[0].phone).toBe('51931022090')
