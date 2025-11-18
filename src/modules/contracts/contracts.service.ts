@@ -100,6 +100,7 @@ export class ContractsService {
         base64: clearBase64(base64),
       })),
       flags: {
+        ...createContractDto.flags,
         chosenNotificationOptions,
       },
       users: createContractDto.users.map(({ name, email, groups, phone }) => ({

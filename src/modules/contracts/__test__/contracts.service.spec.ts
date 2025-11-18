@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { handleAxiosError } from '@app/common/utils/axios-error'
 import { HttpService } from '@nestjs/axios'
 import { Logger } from '@nestjs/common'
@@ -15,8 +12,6 @@ jest.mock('@app/common/utils/axios-error')
 
 describe('ContractsService', () => {
   let service: ContractsService
-  let httpService: HttpService
-  let configService: ConfigService
 
   const mockConfigService = {
     getOrThrow: jest.fn((key: string) => {
@@ -45,8 +40,6 @@ describe('ContractsService', () => {
     }).compile()
 
     service = module.get<ContractsService>(ContractsService)
-    httpService = module.get<HttpService>(HttpService)
-    configService = module.get<ConfigService>(ConfigService)
   })
 
   afterEach(() => {
